@@ -34,5 +34,11 @@ public class GlobalExceptionHandler extends RouteBuilder
                 .handled(true)
                 .log(LoggingLevel.ERROR, "Aggregation failed")
                 .to("file:data/aggregation-error");
+
+
+        onException(Exception.class)
+                .handled(true)
+                .log(LoggingLevel.ERROR, " Error: ${exception.message}")
+                .to("file:data/error");
     }
 }
