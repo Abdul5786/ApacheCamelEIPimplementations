@@ -26,6 +26,8 @@ public class AcarsRoutes extends RouteBuilder
                     }
                 })
                 .log(" message recieved from kafka passes to process")
+                .wireTap("direct:audit")
+                .log("send to wire tap for auditing")
                 .process("acarsTranslatorProcessor")
                 .log("processComplted--directedto--aggregate")
                 .to("direct:aggregate");
